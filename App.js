@@ -1,5 +1,7 @@
 import { React } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import Tempo from './components/Tempo';
+// import api from './components/Api';
 
 export default function App() {
   return (
@@ -15,7 +17,7 @@ export default function App() {
 
             <TextInput 
             style={styles.input}
-            placeholder='sua cidade...'/>
+            placeholder='sua cidade...' placeholderTextColor={'#fff'}/>
           </View>
 
           <View style={styles.blocobotao}> 
@@ -23,6 +25,7 @@ export default function App() {
               <Text style={styles.botaotext}>Buscar</Text>
             </TouchableOpacity>
           </View>
+          <Tempo />
       </View>
     </View>
   );
@@ -64,11 +67,13 @@ const styles = StyleSheet.create({
   }, 
 
   input: {
+    paddingStart: 5,
     width: '100%' ,
-    backgroundColor: '#F9F5EB',
+    borderBottomWidth: 2,
+    borderTopEndRadius: 5,
+    borderTopStartRadius: 5,
+    backgroundColor: '#1C3879',
     color: '#000',
-    borderRadius: 10,
-  
   },
 
   blocobotao: {
