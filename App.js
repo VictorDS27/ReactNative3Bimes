@@ -1,9 +1,18 @@
-import { React } from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import Tempo from './components/Tempo';
+import Api from './components/Api';
 // import api from './components/Api';
 
 export default function App() {
+    const [dados, setDados] = useState();
+    const [cidade, setCidade] = useState();
+
+    async function buscaCidade(){
+      const resposta = await Api.get('weather?array_limit=1&fields=only_results,temp,city_name,description,forecast,max,min,date&key=c58f4f95city_name=Peruibe,SP');
+    setDados(resposta.data.forecast[0]);
+    console.warn(dados);
+    }
   return (
     <View style={styles.container}>
         <View style={styles.conteudo}>
@@ -17,15 +26,16 @@ export default function App() {
 
             <TextInput 
             style={styles.input}
-            placeholder='sua cidade...' placeholderTextColor={'#fff'}/>
+            placeholder='sua cidade...' placeholderTextColor={'#fff'}
+            />
           </View>
 
           <View style={styles.blocobotao}> 
-            <TouchableOpacity style={styles.botao}>
+            <TouchableOpacity style={styles.botao} onKeyPress={buscaCidade}>
               <Text style={styles.botaotext}>Buscar</Text>
             </TouchableOpacity>
           </View>
-          <Tempo />
+          <Tempo data={dados} />
       </View>
     </View>
   );
@@ -73,7 +83,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 5,
     borderTopStartRadius: 5,
     backgroundColor: '#1C3879',
-    color: '#000',
+    color: '#fff',
   },
 
   blocobotao: {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const api = axios.create9({
+const Api = axios.create({
     baseURL:'https://api.hgbrasil.com/'
 });
 
-export default api;
+export default Api;
