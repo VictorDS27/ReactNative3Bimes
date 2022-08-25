@@ -5,13 +5,12 @@ import Api from './components/Api';
 // import api from './components/Api';
 
 export default function App() {
-    const [dados, setDados] = useState();
-    const [cidade, setCidade] = useState();
+    const [dados, setDados] = useState("");
+    const [cidade, setCidade] = useState("itu");
 
     async function buscaCidade(){
-      const resposta = await Api.get('weather?array_limit=1&fields=only_results,temp,city_name,description,forecast,max,min,date&key=c58f4f95city_name=Peruibe,SP');
-    setDados(resposta.data.forecast[0]);
-    console.warn(dados);
+      const response = await Api.get(`weather?array_limit=2&fields=only_results,temp,city_name,forecast,max,min,date,description&key=c58f4f95&city_name=${cidade},SP`);
+      setDados(response.data.forecast[0]);
     }
   return (
     <View style={styles.container}>
@@ -27,11 +26,12 @@ export default function App() {
             <TextInput 
             style={styles.input}
             placeholder='sua cidade...' placeholderTextColor={'#fff'}
+            onChangeText={(value)=>setCidade(value)}
             />
           </View>
 
           <View style={styles.blocobotao}> 
-            <TouchableOpacity style={styles.botao} onKeyPress={buscaCidade}>
+            <TouchableOpacity style={styles.botao} onPress={buscaCidade}>
               <Text style={styles.botaotext}>Buscar</Text>
             </TouchableOpacity>
           </View>
