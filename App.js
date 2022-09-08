@@ -52,7 +52,7 @@ export default function App() {
             )
           }} 
           />
-          {/* <Tempo data={dados} /> */}
+          {/* <Tempo data={dados}  ahtaaaaaaaaaaaaaaaa/> */}
     </View>
   );
 }
