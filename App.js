@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import Tempo from './components/Tempo';
 import Api from './components/Api';
 // import api from './components/Api';
@@ -9,8 +9,8 @@ export default function App() {
     const [cidade, setCidade] = useState("itu");
 
     async function buscaCidade(){
-      const response = await Api.get(`weather?array_limit=2&fields=only_results,temp,city_name,forecast,max,min,date,description&key=c58f4f95&city_name=${cidade},SP`);
-      setDados(response.data.forecast[0]);
+      const response = await Api.get(`weather?array_limit=10&fields=only_results,temp,city_name,forecast,max,min,date,description&key=c58f4f95&city_name=${cidade},SP`);
+      setDados(response.data.forecast);
     }
   return (
     <View style={styles.container}>
@@ -35,8 +35,24 @@ export default function App() {
               <Text style={styles.botaotext}>Buscar</Text>
             </TouchableOpacity>
           </View>
-          <Tempo data={dados} />
+         
       </View>
+      <FlatList 
+      style={styles.lista}
+          data={dados}
+          renderItem={({item})=>{
+            return(
+            
+              <View>
+                <Text style={styles.subtitle}>Data: {item.date}</Text>
+                <Text style={styles.dadostempo}>Max: {item.max}</Text>
+                <Text style={styles.dadostempo}>Min: {item.min}</Text>
+                <Text style={styles.dadostempo}>Descrição: {item.description}</Text>
+              </View>
+            )
+          }} 
+          />
+          {/* <Tempo data={dados} /> */}
     </View>
   );
 }
@@ -51,9 +67,11 @@ const styles = StyleSheet.create({
 
   conteudo: {
     backgroundColor: '#607EAA',
-    padding: 10,
+    padding: 5,
+    marginVertical:40,
     width: 300,
-    borderRadius: 10,
+    borderRadius: 20,
+
   },
 
   blocotitle: {
@@ -105,5 +123,18 @@ const styles = StyleSheet.create({
     color: '#607EAA',
     fontSize: 15,
     fontWeight: '900',
+  },
+
+  dadostempo: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginBottom: 2,
+  },
+  lista: {
+    backgroundColor: '#607EAA',
+    width: 300,
+borderRadius: 10,
+    marginBottom: 40,
+    padding: 5,
   }
 });
