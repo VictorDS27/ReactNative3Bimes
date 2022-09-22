@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet,Image, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import Tempo from './components/Tempo';
 import Api from './components/Api';
 // import api from './components/Api';
@@ -18,6 +18,8 @@ export default function App() {
 
           <View style={styles.blocotitle}>
             <Text style={styles.title}>Previsão do Tempo</Text>
+            <Image source={{uri: 'https://cdn-icons-png.flaticon.com/512/3767/3767036.png'}}
+            style={{width: 40, height: 40, marginTop: 5,}} />
           </View>
 
           <View>
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
 
   blocotitle: {
     marginTop: 20,
-    marginBottom: 30,
+    marginBottom: 10,
     alignItems: 'center'
   },
 
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
   lista: {
     backgroundColor: '#607EAA',
     width: 300,
-borderRadius: 10,
+    borderRadius: 10,
     marginBottom: 40,
     padding: 5,
   }
